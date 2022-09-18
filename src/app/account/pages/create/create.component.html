@@ -1,0 +1,26 @@
+<main class="p-4">
+  <div class="border border-gray-500 rounded-3 p-3" style="min-width: 250px;">
+
+    <div [hidden]="!alertError" class="border border-dashed alert alert-warning alert-dismissible fade show"
+      role="alert">
+      <strong>Erro ao cadastrar usuário!</strong> {{alertErrorMessage}}
+      <button (click)="closeAlertError()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div [hidden]="!alertSuccess" class="border border-dashed alert alert-success alert-dismissible fade show"
+      role="alert">
+      <strong>Usuário cadastrado com suceso!</strong>
+      <button (click)="closeAlertSuccess()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <app-user [appForm]="form" [update]="updateUser"></app-user>
+    <app-address [appForm]="form" [update]="updateAddress"></app-address>
+    <app-account [appForm]="form" [update]="updateAccount"></app-account>
+
+    <button [disabled]="handleDisable()" (click)="submit()" type="button" class="btn btn-primary">Cadastrar</button>
+  </div>
+</main>

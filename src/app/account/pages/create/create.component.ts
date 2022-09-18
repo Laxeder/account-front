@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { debounceTime, Observable } from 'rxjs';
-import { UserService } from './account/service/user.service';
+
+import { UserService } from '@account/service/user.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  selector: 'app-create',
+  templateUrl: './create.component.html',
+  styleUrls: ['./create.component.css'],
 })
-export class AppComponent implements OnInit {
+export class CreateComponent implements OnInit {
   public formValid: boolean = false;
   public isLoading$: Observable<boolean> = new Observable<boolean>();
   public isLoading: boolean = false;
@@ -52,10 +53,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("form:", this.form);
+    console.log('form:', this.form);
 
     this.form.valueChanges.pipe(debounceTime(200)).subscribe((value) => {
-      console.log("form:", this.form);
+      console.log('form:', this.form);
     });
   }
 
