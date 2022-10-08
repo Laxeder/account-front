@@ -1,0 +1,41 @@
+.rede {
+  position: relative;
+  top: -30px;
+}
+
+.close {
+  border: none;
+  background-color: transparent;
+  float: right;
+  right: 0;
+  font-size: 20px;
+  line-height: 10px;
+  position: relative;
+  width: 28px;
+  height: 28px;
+  left: 28px;
+  margin: 0;
+  padding: 0;
+  top: -2px;
+}
+
+.close:hover,
+.close:focus {
+  border: solid 1px;
+  border-radius: 4px;
+}
+
+.close span {
+  position: relative;
+  top: -2px;
+}
+
+.alert-warning .close {
+  color: rgba(102, 77, 3, 1)
+}
+
+.alert-warning .close:hover,
+.alert-warning .close:focus {
+  border-color: rgba(102, 77, 3, 0.5);
+  background-color: rgba(102, 77, 3, 0.08);
+}
