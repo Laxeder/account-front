@@ -23,7 +23,7 @@ export class UserService extends BaseService {
     this._isLoading$.next(true);
 
     return this.http
-      .post(`${this.apiV1}/account`, user, this.headerJson())
+      .post(`${this.apiV1}/account`, user, this.headerJsonWithToken())
       .pipe(
         catchError(super.serviceError),
         finalize(() => this._isLoading$.next(false))
