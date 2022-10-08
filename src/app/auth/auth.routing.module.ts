@@ -10,7 +10,7 @@ import { AuthComponent } from '@auth/auth.component';
 
 const router: Routes = [
   {
-    path: 'auth',
+    path: '',
     component: AuthComponent,
     children: [
       {
