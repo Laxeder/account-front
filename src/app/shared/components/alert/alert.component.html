@@ -1,0 +1,19 @@
+<div
+  class="alert d-flex align-items-center border border-{{borderLocal}} alert-{{colorLocal}} shadow m-0"
+  role="alert"
+>
+
+  <span class="fs-3 pe-3 d-flex justify-content-center flex-column align-items-center">
+    <i class="bi {{iconLocal}}"></i>
+
+    <span class="d-flex align-items-center" style="font-size: 10px;">
+      {{labelLocal}}
+    </span>
+
+  </span>
+
+  <span [innerHTML]="messageLocal"></span>
+
+  <i class="alert-close-icon bi bi-x-circle position-absolute end-0 top-0 p-2 fs-6 text-{{colorLocal}" (click)="onClose()"></i>
+
+</div>

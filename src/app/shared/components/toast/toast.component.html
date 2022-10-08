@@ -1,0 +1,10 @@
+<div class="toast-container position-fixed top-60 end-0" [style.z-index]="'9999'">
+
+  <div class="d-flex flex-row align-items-center row my-2" *ngFor="let toast of (toasts$ | async);"
+    @ToastDelayAnimation>
+
+    <app-alert class="toast show p-0" (close)="onClose(toast)" [type]="toast.type" [message]="toast.message"></app-alert>
+
+  </div>
+
+</div>

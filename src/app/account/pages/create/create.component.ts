@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { debounceTime, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { UserService } from '@account/service/user.service';
+import { AlertService } from '@shared/services/alert.service';
 
 @Component({
   selector: 'app-create',
@@ -10,18 +11,14 @@ import { UserService } from '@account/service/user.service';
   styleUrls: ['./create.component.css'],
 })
 export class CreateComponent implements OnInit {
-  public formValid: boolean = false;
   public isLoading$: Observable<boolean> = new Observable<boolean>();
+  public formValid: boolean = false;
   public isLoading: boolean = false;
 
-  public alertError: boolean = false;
-  public alertSuccess: boolean = false;
-  public alertErrorMessage: string = '';
-
   public form = new FormGroup({
-    user: new FormGroup({}),
     address: new FormGroup({}),
     account: new FormGroup({}),
+    user: new FormGroup({}),
   });
 
   public updateUser(
@@ -45,29 +42,17 @@ export class CreateComponent implements OnInit {
     form.setControl('account', accountForm);
   }
 
-  public constructor(private userService: UserService) {
+  public constructor(
+    private userService: UserService,
+    private alertService: AlertService
+  ) {
     this.isLoading$ = this.userService.isLoading$;
     this.isLoading$.subscribe((value) => {
       this.isLoading = value;
     });
   }
 
-  ngOnInit() {
-    console.log('form:', this.form);
-
-    this.form.valueChanges.pipe(debounceTime(200)).subscribe((value) => {
-      console.log('form:', this.form);
-    });
-  }
-
-  closeAlertError() {
-    this.alertError = false;
-    this.alertErrorMessage = '';
-  }
-
-  closeAlertSuccess() {
-    this.alertSuccess = false;
-  }
+  ngOnInit() {}
 
   submit() {
     if (this.form.valid) {
@@ -76,36 +61,35 @@ export class CreateComponent implements OnInit {
       const user: any = this.form.controls.user.value;
 
       const body = {
-        rg: account.rg,
-        cpf: account.cpf,
-        email: user.email,
-        phone: user.phone,
-        city: address.city,
-        state: address.state,
-        number: address.number,
-        street: address.street,
-        password: user.password,
+        complement: address.complement as string,
+        confirm_password: user.confirmPassword,
+        neighborhood: address.neighborhood,
+        description: account.description,
+        profession: account.profession,
+        birthdate: account.birthdate,
+        first_name: user.firstName,
+        nickname: account.nickname,
+        company: account.company,
         last_name: user.lastName,
         zipcode: address.zipcode,
         picture: account.picture,
-        company: account.company,
-        nickname: account.nickname,
-        first_name: user.firstName,
-        birthdate: account.birthdate,
-        complement: address.complement || '',
-        profession: account.profession,
-        description: account.description,
-        neighborhood: address.neighborhood,
-        confirm_password: user.confirmPassword,
+        password: user.password,
+        street: address.street,
+        number: address.number,
+        state: address.state,
+        city: address.city,
+        phone: user.phone,
+        email: user.email,
+        cpf: account.cpf,
+        rg: account.rg,
       };
 
       this.userService.save(body).subscribe({
         next: (data) => {
-          this.alertSuccess = true;
+          this.alertService.success('Conta cadastrada com sucesso.');
         },
         error: (err) => {
-          this.alertErrorMessage = err.error.message;
-          this.alertError = true;
+          this.alertService.error(err);
         },
       });
     }
