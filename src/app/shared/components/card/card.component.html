@@ -1,0 +1,21 @@
+<div class="card text-center">
+
+  <ng-content select=".card-header" *ngIf="!title"></ng-content>
+
+  <ng-container *ngIf="title">
+    <div class="card-header" [innerHTML]="title"></div>
+  </ng-container>
+
+  <ng-content select=".card-body"></ng-content>
+
+  <ng-container *ngIf="body">
+    <div class="card-body" [innerHTML]="body"></div>
+  </ng-container>
+
+  <ng-content select=".card-footer"></ng-content>
+
+  <ng-container *ngIf="footer">
+    <div class="card-footer" [innerHTML]="footer"></div>
+  </ng-container>
+
+</div>
