@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "deploy:fake": "set NODE_ENV=production && npm ci && npm run build --aot=true --buildOptimizer=true --prod-true --extractCss=true --optimization=true --sourceMap=true --progress=true --force --legacy-peer-deps",
-    "workflow": "git add .; git commit -m 'Run Workflow'; git pull; git switch dev; git fetch; git merge stagging; git add .; git commit -m 'Pre-merge'; git push; git switch stagging; git merge dev; git add .; git commit -m 'Merge from dev'; git push"
+    "workflow": "git add . && git commit -m 'Run Workflow' && git pull && git switch dev && git fetch && git merge stagging && git add . && git commit -m 'Pre-merge' && git push && git switch stagging && git merge dev && git add . && git commit -m 'Merge from dev' && git push"
   },
   "private": true,
   "dependencies": {
