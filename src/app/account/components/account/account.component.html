@@ -1,0 +1,157 @@
+<form [formGroup]="form" class="form needs-validation pt-4">
+
+  <fieldset class="row mb-4">
+    <legend>Informações do seu perfil</legend>
+
+    <div class="col-12 mb-3">
+      <label class="ps-1 pb-1" [class.required]="true" for="picture">Selecionar foto do
+        perfil</label>
+      <input type="file" (base64)="onFileSelected($event)" [class.is-valid]="form.get('picture')?.valid"
+        [class.is-invalid]="pictureTouched && !form.get('picture')?.valid" class="form-control file" id="picture"
+        name="picture" multiple />
+
+      <div class="form-text text-danger ps-2" *ngIf="pictureTouched && form.controls.picture.errors?.['required']">
+        A foto é obrigátoria.
+      </div>
+
+      <div class="form-text text-danger ps-2" *ngIf="pictureTouched && form.controls.picture.errors?.['maxLength']">
+        O arquivo deve ser menor que 1MB.
+      </div>
+
+    </div>
+
+    <div class="col-12 col-md-6 mb-3">
+      <label class="ps-1 pb-1" [class.required]="true" for="nickname">Apelido</label>
+      <input type="text" formControlName="nickname" [class.is-valid]="form.get('nickname')?.valid"
+        [class.is-invalid]="form.controls.nickname.touched && !form.get('nickname')?.valid" class="form-control"
+        id="nickname" name="nickname" placeholder="Digite seu apelido" />
+
+      <div class="form-text text-danger ps-2"
+        *ngIf="form.controls.nickname.touched && form.controls.nickname.errors?.['required']">
+        O apelido é obrigatório.
+      </div>
+
+      <div class="form-text text-danger ps-2" *ngIf="form.controls.nickname.errors?.['minlength']">
+        O apelido precisa ter no mínimo 3 caracteres.
+      </div>
+
+      <div class="form-text text-danger ps-2"
+        *ngIf="!!form.controls.nickname.value && form.controls.nickname.errors?.['pattern']">
+        O apelido não pode conter números e caracteres especiais.
+      </div>
+
+    </div>
+
+    <div class="col-12 col-md-6 mb-3">
+      <label class="ps-1 pb-1" [class.required]="true" for="birthdate">Data de
+        Nascimento</label>
+      <input type="date" [class.is-valid]="form.get('birthdate')?.valid"
+        [class.is-invalid]="form.controls.birthdate.touched && !form.get('birthdate')?.valid" class="form-control file"
+        id="picture" formControlName="birthdate" class="form-control" id="birthdate" name="birthdate" />
+
+      <div class="form-text text-danger ps-2"
+        *ngIf="form.controls.birthdate.touched && form.controls.birthdate.errors?.['required']">
+        A data de nascimento é obrigatório.
+      </div>
+
+      <div class="form-text text-danger ps-2"
+        *ngIf="form.controls.birthdate.touched && form.controls.birthdate.errors?.['invalid']">
+        A data de nascimento está inválida.
+      </div>
+
+      <div class="form-text text-danger ps-2"
+        *ngIf="form.controls.birthdate.touched && form.controls.birthdate.errors?.['maxYear']">
+        Só é permitido pessoas com até 120 anos.
+      </div>
+
+      <div class="form-text text-danger ps-2"
+        *ngIf="form.controls.birthdate.touched && form.controls.birthdate.errors?.['minYear']">
+        Só é permitido pessoas com mais de 8 anos.
+      </div>
+
+    </div>
+
+    <div class="col-12 mb-3">
+      <label class="ps-1 pb-1" [class.required]="true" for="description">Descrição</label>
+      <textarea [class.is-valid]="form.get('description')?.valid"
+        [class.is-invalid]="form.controls.description.touched && !form.get('description')?.valid"
+        formControlName="description" class="form-control" id="description" name="description" rows="5"
+        placeholder="Digite sua descrição"></textarea>
+
+      <div class="form-text text-danger ps-2"
+        *ngIf="form.controls.description.touched && form.controls.description.errors?.['required']">
+        A descrição é obrigatória.
+      </div>
+
+      <div class="form-text text-danger ps-2" *ngIf="form.controls.description.errors?.['minlength']">
+        A descrição prescisa ter no mínimo 3 caracteres.
+      </div>
+
+    </div>
+
+    <div class="col-12 col-md-6 mb-3">
+      <label class="ps-1 pb-1" [class.required]="true" for="profession">Profissão</label>
+      <input type="text" formControlName="profession" [class.is-valid]="form.get('profession')?.valid"
+        [class.is-invalid]="form.controls.profession.touched && !form.get('profession')?.valid" class="form-control"
+        id="profession" name="profession" placeholder=" Digite sua profissão" />
+
+      <div class="form-text text-danger ps-2"
+        *ngIf="form.controls.profession.touched && form.controls.profession.errors?.['required']">
+        A profissão é obrigatória.
+      </div>
+
+      <div class="form-text text-danger ps-2" *ngIf="form.controls.profession.errors?.['minlength']">
+        A profissão prescisa ter no mínimo 3 caracteres.
+      </div>
+
+    </div>
+
+    <div class="col-12 col-md-6 mb-3">
+      <label class="ps-1 pb-1" [class.required]="true" for="company">Empresa</label>
+      <input type="text" formControlName="company" [class.is-valid]="form.get('company')?.valid"
+        [class.is-invalid]="form.controls.company.touched && !form.get('company')?.valid" class="form-control"
+        id="company" name="company" placeholder="Digite sua empresa" />
+
+      <div class="form-text text-danger ps-2"
+        *ngIf="form.controls.company.touched && form.controls.company.errors?.['required']">
+        A empresa é obrigatória.
+      </div>
+
+      <div class="form-text text-danger ps-2" *ngIf="form.controls.company.errors?.['minlength']">
+        A empresa prescisa ter no mínimo 3 caracteres.
+      </div>
+
+    </div>
+
+    <div class="col-12 col-md-6 mb-3">
+      <label class="ps-1 pb-1" [class.required]="true" for="cpf">CPF</label>
+      <input type="text" formControlName="cpf" [class.is-valid]="form.get('cpf')?.valid"
+        [class.is-invalid]="form.controls.cpf.touched && !form.get('cpf')?.valid" class="form-control" id="cpf"
+        name="cpf" placeholder="CPF" />
+
+      <div class="form-text text-danger ps-2"
+        *ngIf="form.controls.cpf.touched && form.controls.cpf.errors?.['required']">
+        O CPF é obrigatório.
+      </div>
+
+    </div>
+
+    <div class="col-12 col-md-6 mb-3">
+      <label class="ps-1 pb-1" [class.required]="true" for="rg">RG</label>
+      <input type="text" formControlName="rg" [class.is-valid]="form.get('rg')?.valid"
+        [class.is-invalid]="form.controls.rg.touched && !form.get('rg')?.valid" class="form-control" id="rg" name="rg"
+        placeholder="RG" />
+
+
+      <div class="form-text text-danger ps-2" *ngIf="form.controls.rg.touched && form.controls.rg.errors?.['required']">
+        O RG é obrigatório.
+      </div>
+
+      <div class="form-text text-danger ps-2" *ngIf="!!form.controls.rg.value && form.controls.rg.errors?.['pattern']">
+        O RG não pode conter letras e caracteres especiais.
+      </div>
+
+    </div>
+
+  </fieldset>
+</form>

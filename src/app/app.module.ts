@@ -1,25 +1,38 @@
-import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
 
+import { AppRoutingModule } from './app.routing.module';
+import { SharedModule } from '@shared/shared.module';
+
+import { AccountModule } from '@account/account.module';
+import { HomeModule } from '@home/home.module';
+import { AuthModule } from '@auth/auth.module';
+
+import { HeaderComponent } from '@components/header/header.component';
+import { FooterComponent } from '@components/footer/footer.component';
 import { AppComponent } from './app.component';
-import { UserComponent } from './user/user.component';
-import { AddressComponent } from './address/address.component';
-import { AccountComponent } from './account/account.component';
-import { InputFileDirective } from './directives/input-file.directive';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    UserComponent,
-    AddressComponent,
-    AccountComponent,
-    InputFileDirective,
+  declarations: [AppComponent, HeaderComponent, FooterComponent],
+  imports: [
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    AccountModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    RouterModule,
+    FormsModule,
+    AuthModule,
+    HomeModule,
+    SharedModule,
   ],
-  imports: [BrowserModule, ReactiveFormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
-  exports: [UserComponent, AddressComponent, AccountComponent],
+  exports: [HeaderComponent, FooterComponent],
 })
 export class AppModule {}

@@ -5,4 +5,13 @@
 .required::after {
   content: " *";
   color: red;
-} 
+}
+
+html,
+body {
+  height: 100% !important
+}
+
+main {
+  min-height: 100%;
+}

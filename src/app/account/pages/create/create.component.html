@@ -1,0 +1,10 @@
+<main class="p-4">
+  <div class="border border-gray-500 rounded-3 p-3 mx-2 shadow" style="min-width: 250px;">
+
+    <app-user [appForm]="form" [update]="updateUser"></app-user>
+    <app-address [appForm]="form" [update]="updateAddress"></app-address>
+    <app-account [appForm]="form" [update]="updateAccount"></app-account>
+
+    <button [disabled]="handleDisable()" (click)="submit()" type="button" class="btn btn-primary">Cadastrar</button>
+  </div>
+</main>
