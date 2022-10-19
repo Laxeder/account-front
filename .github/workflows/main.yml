@@ -11,11 +11,10 @@ jobs:
     steps:
       - name: build do Angular
         uses: actions/checkout@v2
-        run: |
-          sudo apt install nodejs
-          sudo apt install npm
-          sudo npm install --global yarn
-          sudo yarn
+        run: sudo apt install nodejs |
+          sudo apt install npm |
+          sudo npm install --global yarn |
+          sudo yarn |
           sudo npm run build
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
