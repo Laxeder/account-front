@@ -1,0 +1,4 @@
+.alert-close-icon:hover,
+.alert-close-icon:focus {
+  filter: brightness(150%)
+}

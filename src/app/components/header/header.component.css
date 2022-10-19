@@ -1,0 +1,18 @@
+button {
+  display: block;
+}
+
+.bi-house {
+  cursor: pointer;
+}
+
+.text-header {
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+}
+
+.bi-house:hover,
+.bi-house:focus {
+  filter: brightness(150%)
+}

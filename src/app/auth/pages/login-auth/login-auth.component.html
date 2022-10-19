@@ -1,0 +1,91 @@
+<main class="py-4 px-4">
+
+  <div class="p-4 col-6 offset-3 row my-3">
+    <app-card>
+      <div class="card-header">
+        <h1>laxeder</h1>
+      </div>
+    </app-card>
+  </div>
+
+  <form [formGroup]="form" [class.opacity-75]="isLoading$ | async"
+    class="form needs-validation py-4 px-4 mx-2 border border-gray-500 rounded-3 p-3 row shadow">
+
+    <div class="col-12 col-md-auto mb-md-0 me-md-2 rede">
+
+      <div class="d-flex justify-content-center">
+        <img src="../../../../assets/rede.svg" alt="Connections" width="300px" height="300px" />
+      </div>
+
+    </div>
+
+    <div class="col-12 col-md d-flex align-items-center">
+
+      <fieldset class="row">
+        <div style="margin-bottom: 32px;">
+
+          <legend style="margin-bottom: 8px;">Bem-vindo(a) devolta!</legend>
+          <span class="h6">Faça login com sua conta para gerenciar ela novamente.</span>
+
+        </div>
+
+        <div class="form-group row" style="margin-bottom: 8px;">
+          <label for="email" class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-10">
+            <input formControlName="email" type="text" class="form-control" id="email" placeholder="email@example.com"
+              [class.is-valid]="form.get('email')?.valid"
+              [class.is-invalid]="form.get('email')?.touched && !form.get('email')?.valid" />
+
+            <div class="form-text text-danger ps-2"
+              *ngIf="form.get('email')?.touched && form.get('email')?.errors?.['required']">
+              Email é obrigatório.
+            </div>
+
+            <div class="form-text text-danger ps-2" *ngIf="form.get('email')?.errors?.['minlength']">
+              O Email prescisa ter no mínimo 8 caracteres.
+            </div>
+
+            <div class="form-text text-danger ps-2" *ngIf="form.get('email')?.errors?.['maxlength']">
+              O Email não pode ter mais que 50 caracteres.
+            </div>
+
+            <div class="form-text text-danger ps-2" *ngIf="form.get('email')?.errors?.['email']">
+              Email inválido. Favor digitar um email válido.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="password" class="col-sm-2 col-form-label">Senha</label>
+          <div class="col-sm-10">
+            <input formControlName="password" type="password" class="form-control" id="password"
+              placeholder="Digite sua senha" [class.is-valid]="form.get('password')?.valid"
+              [class.is-invalid]="form.get('password')?.touched && !form.get('password')?.valid" />
+
+            <div class="form-text text-danger ps-2"
+              *ngIf="form.get('password')?.touched && form.get('password')?.errors?.['required']">
+              A senha é obrigatório.
+            </div>
+
+            <div class="form-text text-danger ps-2" *ngIf="form.get('password')?.errors?.['minlength']">
+              A senha prescisa ter no mínimo 8 caracteres.
+            </div>
+
+            <div class="form-text text-danger ps-2"
+              *ngIf="!!form.get('password')?.value && form.get('password')?.errors?.['pattern']">
+              A senha precisa conter no mínimo um número, 1 caractere minúsculo, 1 maiúsculo e 1 caractre especial.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group d-flex justify-content-end" style="margin-top: 16px; padding-right: 39px;">
+          <app-button [isLoading]="isLoading$" label="Entrar" (onClick)="submit()"></app-button>
+        </div>
+
+      </fieldset>
+
+    </div>
+
+  </form>
+
+</main>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { debounceTime, Observable } from 'rxjs';
-import { UserService } from './service/user.service';
+import { UserService } from './account/service/user.service';
 
 @Component({
   selector: 'app-root',

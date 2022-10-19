@@ -1,0 +1,4 @@
+.footer {
+  background: rgb(225, 225, 225);
+  background: linear-gradient(0deg, rgb(220, 220, 220) 0%, rgba(255, 0, 0, 0) 100%);
+}

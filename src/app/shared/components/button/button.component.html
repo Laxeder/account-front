@@ -1,0 +1,26 @@
+<button 
+  type="button"  
+  class="btn btn-{{type}}" 
+  [ngClass]="onClasses"
+  [ngStyle]="onStyles"
+  (click)="click()"
+  (blur)="blur()"
+  (focus)="focus()"
+  [disabled]="isLoading | async"
+>
+
+  <ng-container *ngIf="!(isLoading | async)">
+    <span>{{label}}</span>
+  </ng-container>
+
+  <ng-container *ngIf="isLoading | async">
+
+    <span class="me-2">{{message}}</span>
+
+    <div class="spinner-border text-light spinner-border-{{size}}" role="status">
+      <span class="visually-hidden">{{message}}</span>
+    </div>
+
+  </ng-container>
+
+</button>
