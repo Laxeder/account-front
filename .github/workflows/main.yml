@@ -3,9 +3,7 @@ name: Workflow - Push em Dockerhub
 on:
   push:
     branches:
-      - "dev"
-env:
-  IMAGE_NAME: envirioment-node
+      - "stagging"
 
 jobs:
   docker:
