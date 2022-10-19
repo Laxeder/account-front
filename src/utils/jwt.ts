@@ -1,4 +1,4 @@
-import { Buffer } from 'buffer';
+const Buffer = window.Buffer;
 
 /**
  * support algorithm mapping
