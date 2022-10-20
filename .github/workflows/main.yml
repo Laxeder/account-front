@@ -10,13 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: build do Angular
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         run: |
           sudo apt install nodejs
           sudo apt install npm
           sudo npm install --global yarn
           sudo yarn
-          # sudo npm run build
+          sudo npm run build
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
