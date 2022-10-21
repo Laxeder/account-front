@@ -25,7 +25,7 @@ COPY package.json .
 RUN yarn install --frozen-lockfile
 # RUN npm install --save-exact
 
-COPY . .
+COPY ./ ./
 
 # # ! ## ESTAGIO 03 - Maquina para armazenasr as dependencias 
 FROM environment-angular-dependences as environment-angular-build
@@ -38,10 +38,3 @@ ENV APP_HOME=/app
 WORKDIR "$APP_HOME"
 
 RUN npm run build
-
-# # ! ## ESTAGIO 04 - Maquina com servidor http de arquivos estáticos 
-FROM nginx:alpine
-# ## copia a aplicacao para dentro da maquina
-COPY --from=environment-angular-build /app/dist/app /usr/share/nginx/html
-
-EXPOSE 80
