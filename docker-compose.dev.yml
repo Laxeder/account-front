@@ -13,6 +13,6 @@ services:
   deploy:
     image: laxeder/account
     volumes: 
-      - ./app:/usr/share/nginx/html
+      - ./dist/app:/usr/share/nginx/html
     ports:
       - 8080:80
