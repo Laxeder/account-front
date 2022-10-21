@@ -1,6 +1,6 @@
 # # ! ## ESTAGIO 04 - Maquina com servidor http de arquivos estáticos 
 FROM nginx:alpine
 # ## copia a aplicacao para dentro da maquina
-COPY /app/dist/app /usr/share/nginx/html
+COPY ./dist/app /usr/share/nginx/html
 
 EXPOSE 80
