@@ -23,13 +23,13 @@ export class LoginAuthComponent implements OnInit {
   public isLoading: boolean = false;
 
   public form: FormGroup = new FormGroup({
-    email: new FormControl('Laxederbr@gmail.com', [
+    email: new FormControl('fakeLucas@gmail.com', [
       Validators.required,
       Validators.minLength(8),
       Validators.maxLength(50),
       Validators.email,
     ]),
-    password: new FormControl('1234567890Aa@', [
+    password: new FormControl('Alterar@123', [
       Validators.required,
       Validators.minLength(8),
       Validators.pattern(hasLetter),
@@ -56,19 +56,26 @@ export class LoginAuthComponent implements OnInit {
     if (this.form.invalid) return;
     this.form.disable();
 
-    this.authService.login().subscribe({
-      next: (data: any) => {
-        this.alertService.success('Conta conectada com sucesso.');
+    this.authService
+      .login({
+        email: this.form.value.email,
+        password: this.form.value.password,
+      })
+      .subscribe({
+        next: (data: any) => {
+          this.alertService.success('Conta conectada com sucesso.');
 
-        this.form.enable();
-      },
-      error: (err) => {
-        console.error('error auth:', err);
+          this.form.enable();
+        },
+        error: (err) => {
+          console.error('error auth:', err);
 
-        this.alertService.error('Erro ao fazer login. Favor tentar novamente');
+          this.alertService.error(
+            'Erro ao fazer login. Favor tentar novamente'
+          );
 
-        this.form.enable();
-      },
-    });
+          this.form.enable();
+        },
+      });
   }
 }
