@@ -3,35 +3,33 @@ name: Workflow - Push em Dockerhub
 on:
   push:
     branches:
-      - 'stagging'
+      - staging
+
 jobs:
-  docker:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: build Angular
-        uses: actions/checkout@v2
-        run: | 
-          sudo apt install nodejs
-          sudo apt install npm
-          sudo npm install --global yarn
-          sudo yarn
-          sudo npm run build
-      -
-        name: Set up QEMU
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
-      -
-        name: Set up Docker Buildx
+
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      -
-        name: Login to DockerHub
+
+      - name: Login to DockerHub
         uses: docker/login-action@v2
         with:
           username: ${{secrets.DOCKERHUB_USERNAME}}
           password: ${{secrets.DOCKERHUB_TOKEN}}
-       -
-        name: Build and push
+
+      - name: Build and push
         uses: docker/build-push-action@v3
         with:
+          context: ./
           push: true
-          tags:  ${{secrets.DOCKERHUB_USERNAME}}/account:latest
+          tags: laxeder/account:latest
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
+  

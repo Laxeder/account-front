@@ -9,3 +9,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "4000:80"
+
+  deploy:
+    image: laxeder/account
+    ports:
+      - 8080:80

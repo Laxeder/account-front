@@ -1,42 +1,46 @@
 import {
   BehaviorSubject,
+  catchError,
   delay,
   filter,
   finalize,
   map,
   Observable,
   of,
-  switchMap,
+  pluck,
   tap,
 } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 import { environment } from '@environments/environment';
-import { Storage } from 'src/utils/storage';
+import { BaseService } from './base.service';
 import * as jwt from '@utils/jwt';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthService extends BaseService {
   private _isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
   );
-  private storage: Storage = new Storage();
 
   public get isLoading$(): Observable<boolean> {
     return this._isLoading$.asObservable();
   }
 
-  constructor() {}
+  constructor(private http: HttpClient) {
+    super();
+  }
 
-  public login(): Observable<any> {
+  public login(body: any): Observable<any> {
     this._isLoading$.next(true);
 
-    return of({}).pipe(
-      switchMap(this.mockLogin),
+    return this.http.post(`${this.apiV1}/account/login`, body).pipe(
+      catchError(super.serviceError),
       filter((response: any) => response.hasOwnProperty('token')),
-      map((response: any) => response.token),
+      pluck("token"),
+      // map((response: any) => response.token),
       tap((token: string) => this.storage.setItem('token', token)),
       tap((token: string) => this.storage.setItem('user', jwt.decode(token))),
       finalize(() => this._isLoading$.next(false))
@@ -45,17 +49,5 @@ export class AuthService {
 
   public logout(): Observable<any> {
     return of({}).pipe();
-  }
-
-  private mockLogin(): Observable<any> {
-    return of({}).pipe(
-      delay(2000),
-      map(
-        () =>
-          <any>{
-            token: environment.authToken,
-          }
-      )
-    );
   }
 }
