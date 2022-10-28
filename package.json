@@ -25,6 +25,7 @@
     "@popperjs/core": "2.11.6",
     "bootstrap": "5.2.0",
     "bootstrap-icons": "1.9.1",
+    "buffer": "6.0.3",
     "dotenv": "16.0.2",
     "jquery": "3.6.1",
     "popper.js": "1.16.1",
