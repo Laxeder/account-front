@@ -1,10 +1,8 @@
 import {
   BehaviorSubject,
   catchError,
-  delay,
   filter,
   finalize,
-  map,
   Observable,
   of,
   pluck,
@@ -12,10 +10,9 @@ import {
 } from 'rxjs';
 import { Injectable } from '@angular/core';
 
-import { environment } from '@environments/environment';
+import { HttpClient } from '@angular/common/http';
 import { BaseService } from './base.service';
 import * as jwt from '@utils/jwt';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +36,7 @@ export class AuthService extends BaseService {
     return this.http.post(`${this.apiV1}/account/login`, body).pipe(
       catchError(super.serviceError),
       filter((response: any) => response.hasOwnProperty('token')),
-      pluck("token"),
+      pluck('token'),
       // map((response: any) => response.token),
       tap((token: string) => this.storage.setItem('token', token)),
       tap((token: string) => this.storage.setItem('user', jwt.decode(token))),
