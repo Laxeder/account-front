@@ -2,7 +2,8 @@ button {
   display: block;
 }
 
-.bi-house {
+.bi-house,
+.account-picture {
   cursor: pointer;
 }
 
@@ -10,6 +11,10 @@ button {
   cursor: pointer;
   user-select: none;
   text-decoration: none;
+}
+
+.account-name {
+  cursor: pointer;
 }
 
 .bi-house:hover,

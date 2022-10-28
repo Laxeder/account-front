@@ -1,0 +1,9 @@
+<div class="text-center">
+
+  <ng-content select=".template-button" *ngIf="isTemplate"></ng-content>
+
+  <ng-container *ngIf="!isTemplate">
+    <button type="button" class="btn btn-{{type}}" (click)="click()">{{title}}</button>
+  </ng-container>
+
+</div>

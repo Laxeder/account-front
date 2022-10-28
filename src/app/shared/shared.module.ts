@@ -8,6 +8,7 @@ import { DraggableDirective } from '@shared/directives/draggable.directive';
 import { AlertComponent } from '@shared/components/alert/alert.component';
 import { ToastComponent } from '@shared/components/toast/toast.component';
 import { CardComponent } from './components/card/card.component';
+import { TemplateButtonComponent } from './components/template-button/template-button.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { CardComponent } from './components/card/card.component';
     InputAutofocus,
     AlertComponent,
     ToastComponent,
-    CardComponent
+    CardComponent,
+    TemplateButtonComponent,
   ],
   exports: [
     InputFileDirective,
@@ -26,7 +28,8 @@ import { CardComponent } from './components/card/card.component';
     InputAutofocus,
     AlertComponent,
     ToastComponent,
-    CardComponent
+    CardComponent,
+    TemplateButtonComponent,
   ],
   imports: [CommonModule],
 })

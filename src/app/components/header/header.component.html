@@ -6,7 +6,12 @@
   </div>
 
   <div class="col d-flex justify-content-end p-0">
-    <button type="button" class="btn btn-primary" (click)="onLogin()">Entrar</button>
+    <app-template-button type="primary" title="Entrar" [isTemplate]="user.fullName" (onClick)="onLogin()">
+      <div class="template-button d-flex align-items-center border border-2 rounded bg-light text-secondary p-1">
+        <img class="me-2 account-picture rounded-circle" height="32px" width="32px" src="data:image/png;base64,{{user.picture}}">
+        <span class="account-name h6 text-center mb-0">{{user.fullName}}</span>
+      </div>
+    </app-template-button>
   </div>
 
 </header>
