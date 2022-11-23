@@ -52,11 +52,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("form:", this.form);
-
-    this.form.valueChanges.pipe(debounceTime(200)).subscribe((value) => {
-      console.log("form:", this.form);
-    });
+    this.form.valueChanges.pipe(debounceTime(200)).subscribe((value) => {});
   }
 
   closeAlertError() {

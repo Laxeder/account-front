@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { Storage } from '@utils/storage';
 
 @Component({
@@ -10,14 +10,15 @@ import { Storage } from '@utils/storage';
 })
 export class HeaderComponent implements OnInit {
   public title: string = 'Account Service';
-  public accountName: string = '';
   public user: any = {};
 
   private storage: Storage = new Storage();
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.user = this.storage.getItem('user');
   }
 

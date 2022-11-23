@@ -6,9 +6,10 @@
   </div>
 
   <div class="col d-flex justify-content-end p-0">
-    <app-template-button type="primary" title="Entrar" [isTemplate]="user.fullName" (onClick)="onLogin()">
+    <app-template-button type="primary" title="Entrar" [isTemplate]="user.uid" (onClick)="onLogin()">
       <div class="template-button d-flex align-items-center border border-2 rounded bg-light text-secondary p-1">
-        <img class="me-2 account-picture rounded-circle" height="32px" width="32px" src="data:image/png;base64,{{user.picture}}">
+        <img class="me-2 account-picture rounded-circle" height="32px" width="32px"
+          src="{{user.picture}}">
         <span class="account-name h6 text-center mb-0">{{user.fullName}}</span>
       </div>
     </app-template-button>

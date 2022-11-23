@@ -5,13 +5,12 @@ import {
   finalize,
   Observable,
   of,
-  pluck,
   tap,
 } from 'rxjs';
 import { Injectable } from '@angular/core';
 
+import { BaseService } from '@shared/services/base.service';
 import { HttpClient } from '@angular/common/http';
-import { BaseService } from './base.service';
 import * as jwt from '@utils/jwt';
 
 @Injectable({
@@ -35,11 +34,13 @@ export class AuthService extends BaseService {
 
     return this.http.post(`${this.apiV1}/account/login`, body).pipe(
       catchError(super.serviceError),
-      filter((response: any) => response.hasOwnProperty('token')),
-      pluck('token'),
-      // map((response: any) => response.token),
-      tap((token: string) => this.storage.setItem('token', token)),
-      tap((token: string) => this.storage.setItem('user', jwt.decode(token))),
+      filter(
+        (response: any) =>
+          response.hasOwnProperty('token') && response.hasOwnProperty('refresh')
+      ),
+      tap((res: any) => this.storage.setItem('token', res.token)),
+      tap((res: any) => this.storage.setItem('refresh', res.refresh)),
+      tap((res: any) => this.storage.setItem('user', jwt.decode(res.token))),
       finalize(() => this._isLoading$.next(false))
     );
   }

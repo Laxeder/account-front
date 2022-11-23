@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
 import { debounceTime } from 'rxjs';
-import { onlyLetters, onlyNumbers } from 'src/utils/regex';
+
+import { onlyLetters, onlyNumbers } from '@utils/regex';
 
 @Component({
   selector: 'app-address',
@@ -49,7 +50,6 @@ export class AddressComponent implements OnInit {
   ngOnInit(): void {
     this.form.valueChanges.pipe(debounceTime(200)).subscribe((value) => {
       this.update(this.form, this.appForm);
-      console.log('address-controls', this.form.controls);
     });
   }
 }

@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
 import { debounceTime, filter, map } from 'rxjs';
 
 import {
@@ -10,7 +10,7 @@ import {
   hasLetterUpperCase,
   hasLetterPhone,
   onlyLetters,
-} from '../../../../utils/regex';
+} from '@utils/regex';
 
 @Component({
   selector: 'app-user',
@@ -83,8 +83,6 @@ export class UserComponent implements OnInit {
         }
       });
 
-    this.form.valueChanges.subscribe((value: any) => {
-      console.log('userForm', this.form.valid);
-    });
+    this.form.valueChanges.subscribe((value: any) => {});
   }
 }

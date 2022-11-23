@@ -22,7 +22,6 @@ export class BaseService {
     return {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Bearer: this.storage.getItem('token'),
       }),
     };
   }

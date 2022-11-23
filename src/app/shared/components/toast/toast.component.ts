@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 
 import { ToastDelayAnimation } from '@shared/animations/toast.animation';
 import { AlertService } from '@shared/services/alert.service';
-import { Toast } from '@shared/models/toast';
+import { Toast } from '@shared/types/toast';
 
 @Component({
   selector: 'app-toast',
@@ -24,8 +24,6 @@ export class ToastComponent implements OnInit {
   }
 
   public onClose(toast: Toast) {
-    console.log('close alert');
-
     this.alertService.remove(toast);
   }
 }

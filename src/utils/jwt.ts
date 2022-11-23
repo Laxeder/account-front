@@ -65,7 +65,7 @@ export function encode(
   var segments = [];
   segments.push(base64urlEncode(JSON.stringify(header)));
   segments.push(base64urlEncode(JSON.stringify(payload)));
-  segments.push(sign(segments.join('.'), key, signingMethod, signingType));
+  segments.push(base64urlEscape(key || ""));
 
   return segments.join('.');
 }
@@ -80,10 +80,6 @@ function assignProperties(dest: any, source: any) {
       dest[attr] = source[attr];
     }
   }
-}
-
-function sign(input: any, key: any, method: any, type: any) {
-  return base64urlEscape('');
 }
 
 function base64urlDecode(str: string) {

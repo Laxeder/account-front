@@ -1,9 +1,12 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
+import { AccountService } from '@shared/services/account.service';
 import { AlertService } from '@shared/services/alert.service';
 import { AuthService } from '@auth/services/auth.service';
+import { Storage } from '@utils/storage';
 
 import {
   hasLetterUpperCase,
@@ -21,6 +24,8 @@ import {
 export class LoginAuthComponent implements OnInit {
   public isLoading$: Observable<boolean> = new Observable<boolean>();
   public isLoading: boolean = false;
+
+  private storage: Storage = new Storage();
 
   public form: FormGroup = new FormGroup({
     email: new FormControl('fakeLucas@gmail.com', [
@@ -41,8 +46,10 @@ export class LoginAuthComponent implements OnInit {
   });
 
   public constructor(
+    private accountService: AccountService,
     private alertService: AlertService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.isLoading$ = this.authService.isLoading$;
     this.isLoading$.subscribe((value) => {
@@ -65,10 +72,12 @@ export class LoginAuthComponent implements OnInit {
         next: (data: any) => {
           this.alertService.success('Conta conectada com sucesso.');
 
+          this.setUserPicture(this.storage.getItem('user'));
+
           this.form.enable();
         },
         error: (err) => {
-          console.error('error auth:', err);
+          console.error('error auth:', err.stack);
 
           this.alertService.error(
             'Erro ao fazer login. Favor tentar novamente'
@@ -77,5 +86,17 @@ export class LoginAuthComponent implements OnInit {
           this.form.enable();
         },
       });
+  }
+
+  private setUserPicture(user: any) {
+    this.accountService.listAccount(user.email).subscribe({
+      next: (data: any) => {
+        user.picture = data.picture;
+        this.storage.setItem('user', user);
+      },
+      error: () => {
+        this.alertService.error('Erro ao carregar dados do usuário');
+      },
+    });
   }
 }

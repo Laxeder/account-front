@@ -2,7 +2,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
-import { Toast } from '@shared/models/toast';
+import { Toast } from '@shared/types/toast';
 
 @Injectable({
   providedIn: 'root',
