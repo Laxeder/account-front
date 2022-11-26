@@ -86,7 +86,7 @@ export class AccountComponent implements OnInit {
       return;
     }
 
-    if (file.length > 1024) {
+    if (file.length > 1024 ** 2) {
       this.form.get('picture')?.setErrors({ maxLength: true });
       return;
     }

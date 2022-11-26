@@ -61,7 +61,7 @@ export class CreateComponent implements OnInit {
       const user: any = this.form.controls.user.value;
 
       const body = {
-        complement: address.complement as string,
+        complement: address.complement || '',
         confirm_password: user.confirmPassword,
         neighborhood: address.neighborhood,
         description: account.description,
@@ -89,7 +89,7 @@ export class CreateComponent implements OnInit {
           this.alertService.success('Conta cadastrada com sucesso.');
         },
         error: (err) => {
-          this.alertService.error(err);
+          this.alertService.error(err.error.message);
         },
       });
     }

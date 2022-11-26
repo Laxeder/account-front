@@ -6,14 +6,7 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  distinctUntilChanged,
-  filter,
-  finalize,
-  first,
-  map,
-  Observable,
-} from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { Storage } from '@utils/storage';
 
@@ -31,30 +24,23 @@ export class TokenInterceptorService implements HttpInterceptor {
     const refresh: any = this.storage.getItem('refresh');
     const token: any = this.storage.getItem('token');
 
-    if (!!token && !!refresh) {
-      req = req.clone({
-        setHeaders: {
-          Bearer: token,
-          'Api-X-Token': refresh,
-          //? Token | Api-X-Token | Api-Token | Authorization | Refresh | Auth
-        },
-      });
-    }
+    const reqChanged = req.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`,
+        'Api-X-Token': refresh,
+        // ? Token | Api-X-Token | Api-Token | Authorization | Refresh | Auth
+      },
+    });
 
-    return next.handle(req).pipe(
-      distinctUntilChanged(),
+    return next.handle(reqChanged).pipe(
       map((event: HttpEvent<any>) => {
-        // if (!(event instanceof HttpResponse)) return event;
+        if (!(event instanceof HttpResponse)) return event;
 
-        // const res = event.clone();
+        const tokenRes = event.headers.get('Bearer');
+        const refreshRes = event.headers.get('Api-X-Token');
 
-        // console.log(event)
-
-        // const tokenRes = event.headers.get('Bearer');
-        // const refreshRes = event.headers.get('Api-X-Token');
-
-        // if (tokenRes) this.storage.setItem('token', tokenRes);
-        // if (refreshRes) this.storage.setItem('refresh', refreshRes);
+        if (tokenRes) this.storage.setItem('token', tokenRes);
+        if (refreshRes) this.storage.setItem('refresh', refreshRes);
 
         return event;
       })
